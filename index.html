@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salsa App - Únete como Streamer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #C71585 0%, #8B008B 50%, #4B0082 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF69B4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 10px #FFD700); }
+            50% { filter: drop-shadow(0 0 20px #FF69B4); }
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #00FFFF;
+            text-shadow: 0 0 10px #00FFFF;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px #FFD700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .requirement-item {
+            background: rgba(255, 105, 180, 0.2);
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 15px;
+            border-left: 4px solid #00FFFF;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .requirement-item:hover {
+            background: rgba(255, 105, 180, 0.3);
+            transform: translateX(10px);
+        }
+
+        .icon {
+            font-size: 1.5em;
+            color: #FFD700;
+            text-shadow: 0 0 10px #FFD700;
+        }
+
+        .steps-list {
+            counter-reset: step-counter;
+            list-style: none;
+        }
+
+        .step-item {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border: 2px solid #00FFFF;
+            position: relative;
+            padding-left: 80px;
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #FFD700;
+        }
+
+        .step-item::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #FFD700, #FF69B4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .payment-method {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+
+        .payment-title {
+            color: #00FFFF;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #00FFFF;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(255, 105, 180, 0.2));
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+        }
+
+        .cta-title {
+            font-size: 2.5em;
+            color: #FFD700;
+            text-shadow: 0 0 20px #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-android {
+            background: linear-gradient(45deg, #00FF00, #00FFFF);
+            color: #000;
+        }
+
+        .btn-ios {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6);
+        }
+
+        .checklist {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid #00FF00;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li::before {
+            content: "✨ ";
+            color: #FFD700;
+            font-size: 1.2em;
+        }
+
+        .info-box {
+            background: rgba(255, 215, 0, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border: 2px dashed #FFD700;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            .section {
+                padding: 25px;
+            }
+            .step-item {
+                padding-left: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="floating">❤️ Salsa App</h1>
+            <p class="subtitle">✨ Conviértete en Streamer y Genera Ingresos ✨</p>
+        </header>
+
+        <div class="section">
+            <h2 class="section-title">🔺 Requisitos para ser Streamer</h2>
+            <div class="requirement-item">
+                <span class="icon">👩</span>
+                <span>Ser mujer mayor de edad (de 18 a 39 años)</span>
+            </div>
+            <div class="requirement-item">
+                <span class="icon">⏰</span>
+                <span>Disponibilidad de al menos 6 horas diarias para transmitir</span>
+            </div>
+            <div class="requirement-item">
+                <span class="icon">📱</span>
+                <span>Celular con buena capacidad de cámara (gama media o superior)</span>
+            </div>
+            <div class="requirement-item">
+                <span class="icon">🏠</span>
+                <span>Espacio adecuado para trabajar, con posibilidad de personalizarlo como escenario de transmisión</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📱 Pasos para Iniciar</h2>
+            <ul class="steps-list">
+                <li class="step-item">
+                    <h3 style="color: #00FFFF; margin-bottom: 10px;">Conoce la Aplicación</h3>
+                    <p>Familiarízate con la plataforma a través de nuestros recursos informativos sobre qué es Salsa App.</p>
+                </li>
+                <li class="step-item">
+                    <h3 style="color: #00FFFF; margin-bottom: 10px;">Métodos de Pago</h3>
+                    <div class="payment-method">
+                        <h4 class="payment-title">✨ Balance Virtual</h4>
+                        <ul>
+                            <li>Disponible para streamers en México, Brasil, Perú y Colombia</li>
+                            <li>Retira tus ganancias directamente a tu cuenta bancaria local</li>
+                            <li>Sin intermediarios ni comisiones</li>
+                            <li>Completa el formulario con datos en minúsculas y sin símbolos</li>
+                        </ul>
+                    </div>
+                    <div class="payment-method">
+                        <h4 class="payment-title">✨ Cripto Billetera</h4>
+                        <ul>
+                            <li>Disponible para streamers de cualquier país</li>
+                            <li>Retira tus ganancias a una billetera de criptomonedas</li>
+                            <li>La cuenta debe ser verificada antes de realizar retiros</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <h3 style="color: #00FFFF; margin-bottom: 10px;">Regístrate en la Aplicación</h3>
+                    <div class="info-box">
+                        <p style="margin-bottom: 15px;">Completa tu registro eligiendo el género FEMENINO (no se puede cambiar después).</p>
+                        <div class="checklist">✅ Registrate con un nombre de usuario que NO sea tu nombre real</div>
+                        <div class="checklist">✅ Tu nombre NO debe incluir emojis sugestivos</div>
+                        <div class="checklist">✅ Verificación con foto de ID (ambos lados) y foto tuya con ID al chat de SOPORTE</div>
+                        <div class="checklist">✅ Sube mínimo 5 fotos atractivas para tu perfil</div>
+                        <div class="checklist">✅ Sube al menos 3 videos de máximo 15 segundos</div>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <h3 style="color: #00FFFF; margin-bottom: 10px;">Información para Finalizar el Registro</h3>
+                    <p>Una vez completados los pasos anteriores, envía:</p>
+                    <ul style="margin-top: 10px;">
+                        <li>Tu nombre completo real</li>
+                        <li>Tu edad</li>
+                        <li>Tu país y ciudad de residencia</li>
+                        <li>Captura de pantalla de tu perfil en Salsa con tu mejor foto</li>
+                        <li>Espera indicaciones de tu agencia para la verificación de perfil</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="cta-section">
+            <h2 class="cta-title">🌟 Oportunidad Única</h2>
+            <p style="font-size: 1.2em; margin: 20px 0;">Este es un trabajo que requiere compromiso, pero también ofrece grandes recompensas.</p>
+            <p style="font-size: 1.3em; color: #FFD700; text-shadow: 0 0 15px #FFD700;">¡Estamos emocionados de que formes parte de nuestra comunidad!</p>
+            
+            <div class="download-buttons">
+                <a href="https://slsa.me/647410549" class="btn btn-android" target="_blank">
+                    📱 Descargar para Android
+                </a>
+                <a href="https://salsavideochat.com" class="btn btn-ios" target="_blank">
+                    🍎 Descargar para iOS
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
